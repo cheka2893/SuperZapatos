@@ -1,0 +1,37 @@
+<%- model_class = Store -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:Name) %></th>
+      <th><%= model_class.human_attribute_name(:Address) %></th>
+      <th><%= model_class.human_attribute_name("Created at") %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= link_to store.id, store_path(store) %></td>
+        <td><%= store.name %></td>
+        <td><%= store.address %></td>
+        <td><%= store.created_at.strftime("%d %b. %Y") %></td>
+        <td>
+          <%= link_to "Show", store_path(store), 
+                      :class => 'btn btn-default btn-xs' %>
+          <%= link_to "Edit", edit_store_path(store), :class => 'btn btn-default btn-xs' %>
+          <%= link_to "Remove", store_path(store),
+                      :method => :delete,
+                      :data => { :confirm => "Are you sure?" },
+                      :class => 'btn btn-xs btn-danger white_color_for_text' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New", new_store_path,
+            :class => 'btn btn-primary white_color_for_text' %>

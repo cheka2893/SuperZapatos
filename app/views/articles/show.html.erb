@@ -1,0 +1,26 @@
+<%- model_class = Article -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:Name) %>:</strong></dt>
+  <dd><%= @article.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:Description) %>:</strong></dt>
+  <dd><%= @article.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:Price) %>:</strong></dt>
+  <dd><%= @article.price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:Shelf) %>:</strong></dt>
+  <dd><%= @article.total_in_shelf %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:Vault) %>:</strong></dt>
+  <dd><%= @article.total_in_vault %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:Store) %>:</strong></dt>
+  <dd><%= @article.store_id %></dd>
+</dl>
+
+<%= link_to "Back", articles_path, :class => 'btn btn-default'  %>
+<%= link_to "Edit", edit_article_path(@article), :class => 'btn btn-default' %>
+<%= link_to "Remove", article_path(@article),
+              :method => 'delete',
+              :data => { :confirm => "Are you sure?" },
+              :class => 'btn btn-danger white_color_for_text' %>

@@ -1,0 +1,49 @@
+<%- model_class = Article -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:Name) %></th>
+      <th><%= model_class.human_attribute_name(:Description) %></th>
+      <th><%= model_class.human_attribute_name(:Price) %></th>
+      <th><%= model_class.human_attribute_name(:Shelf) %></th>
+      <th><%= model_class.human_attribute_name(:Vault) %></th>
+      <th><%= model_class.human_attribute_name(:Store) %></th>
+      <th><%= model_class.human_attribute_name("Created at") %></th>
+      <th><%= model_class.human_attribute_name(:Actions) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= link_to article.id, article_path(article) %></td>
+        <td><%= article.name %></td>
+        <td><%= article.description %></td>
+        <td><%= article.price %></td>
+        <td><%= article.total_in_shelf %></td>
+        <td><%= article.total_in_vault %></td>
+        <td><%= article.store_id %></td>
+        <!--Day / Month (%b. stands for abbreviated month) / Year-->
+        <td><%= article.created_at.strftime("%d %b. %Y") %></td>
+        <td>
+        <%= link_to "Show", article_path(article), 
+                      :class => 'btn btn-default btn-xs' %>
+
+          <%= link_to "Edit", edit_article_path(article), 
+                      :class => 'btn btn-default btn-xs' %>
+
+          <%= link_to "Remove", article_path(article),
+                      :data => { confirm: 'Are you sure?'},
+                      :method => :delete,
+                      :class => 'btn btn-xs btn-danger white_color_for_text' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New", new_article_path,
+            :class => 'btn btn-primary white_color_for_text' %>

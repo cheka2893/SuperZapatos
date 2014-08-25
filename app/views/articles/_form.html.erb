@@ -1,0 +1,68 @@
+<%= form_for @article, :html => { :class => "form-horizontal article" } do |f| %>
+
+    <% if @article.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@article[:name]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@article[:description]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :class => 'form-control' %>
+    </div>
+    <%= error_span(@article[:price]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :total_in_shelf, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :total_in_shelf, :class => 'form-control' %>
+    </div>
+    <%= error_span(@article[:total_in_shelf]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :total_in_vault, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :total_in_vault, :class => 'form-control' %>
+    </div>
+    <%= error_span(@article[:total_in_vault]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :store_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.collection_select :store_id, @stores, :id, :name, include_blank: true %>
+    </div>
+    <%= error_span(@article[:store_id]) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            articles_path, :class => 'btn btn-default' %>
+  </div>
+  
+
+<% end %>
